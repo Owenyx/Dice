@@ -45,7 +45,7 @@ class Menu:
             })
 
     def update(self):
-        """Handle menu logic, return (player_count, speed) if game should start"""
+        """Handle menu logic"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -66,7 +66,8 @@ class Menu:
                 elif self.buttons['speed_right'].collidepoint(mouse_pos):
                     self.current_speed_index = (self.current_speed_index + 1) % len(self.speed_options)
                 elif self.buttons['start'].collidepoint(mouse_pos):
-                    return (self.player_count, self.speed_options[self.current_speed_index])
+                    # Return player count, speed, and selected names
+                    return (self.player_count, self.speed_options[self.current_speed_index], self.selected_names)
 
                 # Handle name selection buttons
                 for button in self.name_buttons:

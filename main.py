@@ -39,12 +39,11 @@ class DiceApp:
 
             # Handle game states
             if self.current_state == "menu":
-                result = self.menu.update()  # Now returns (player_count, speed)
+                menu_result = self.menu.update()
                 self.menu.draw(self.screen)
-                if result:  # If menu returns settings
-                    player_count, speed = result
-                    # Only pass sound if it loaded successfully
-                    self.game = Game(self.screen, player_count, speed, self.roll_sound)
+                if menu_result:
+                    player_count, speed, names = menu_result  # Unpack all three values
+                    self.game = Game(self.screen, player_count, speed, self.roll_sound, player_names=names)
                     self.current_state = "game"
             elif self.current_state == "game":
                 game_over = self.game.update(dt)  # Pass delta time to game
